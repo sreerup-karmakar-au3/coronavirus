@@ -1,0 +1,12 @@
+#cases, #deaths, #recovery {
+    font-family: 'Oswald', sans-serif;
+}
+
+#caption {
+    font-family: 'Vollkorn', serif;
+}
+
+th {
+    position: sticky;
+    top: -1px;
+}

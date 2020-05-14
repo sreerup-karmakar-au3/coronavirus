@@ -1,1 +1,1 @@
-# coronavirus
+# Wuhan Coronavirus

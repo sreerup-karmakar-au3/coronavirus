@@ -1,0 +1,24 @@
+{
+  "name": "coronavirus",
+  "version": "1.0.0",
+  "description": "Coronavirus live update",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sreerup-karmakar-au3/coronavirus.git"
+  },
+  "author": "Sreerup Karmakar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sreerup-karmakar-au3/coronavirus/issues"
+  },
+  "homepage": "https://github.com/sreerup-karmakar-au3/coronavirus#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.1.1"
+  }
+}
