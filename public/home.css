@@ -23,9 +23,16 @@ canvas {
     height: 350px !important;
 }
 
+@media only screen and (max-width: 1200px) {
+    .customtable {
+        overflow: auto;
+        max-height: 100vh;
+    }
+}
+
 th {
     position: sticky;
-    top: -1px;
+    top: -2px;
 }
 
 tbody tr {
