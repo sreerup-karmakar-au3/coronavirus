@@ -63,6 +63,7 @@ $.when(
     });
 
     if(!jQuery.isEmptyObject(countrydetail.timeline)) {
+        $('table').css("border-collapse", "separate");
         $('#caption').text(`Day-wise count`);
         $('thead').append('<tr><th scope="col">Date</th><th scope="col">Cases</th><th scope="col">Deaths</th><th scope="col">Recovered</th></tr>');
         Object.keys(countrydetail.timeline.cases).forEach(function(key) {
