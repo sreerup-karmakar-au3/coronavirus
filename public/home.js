@@ -16,10 +16,10 @@ $.when(
         `<tr class="font-weight-bold" onclick="window.location='/details?countryid=${item.countryInfo._id}'">
             <td><img class="flags" src="${item.countryInfo.flag}"/> ${item.country}</td>
             <td>${item.cases.toLocaleString("hi-IN")}</td>
-            ${(item.todayCases>0) ? (`<td>+${item.todayCases.toLocaleString("hi-IN")}</td>`) : ('<td></td>')}
-            ${(item.deaths !== null) ? (`<td>${item.deaths.toLocaleString("hi-IN")}</td>`) : ('<td></td>')}
-            ${(item.todayDeaths>0) ? (`<td class="text-danger">+${item.todayDeaths.toLocaleString("hi-IN")}</td>`) : (`<td>${item.todayDeaths}</td>`)}
-            ${(item.recovered>0 && item.recovered !== null) ? (`<td class="text-success">${item.recovered.toLocaleString("hi-IN")}</td>`) : ('<td></td>')}
+            ${(item.todayCases>0 && item.todayCases !== null) ? (`<td>+${item.todayCases.toLocaleString("hi-IN")}</td>`) : ('<td>0</td>')}
+            ${(item.deaths>0 && item.deaths !== null) ? (`<td>${item.deaths.toLocaleString("hi-IN")}</td>`) : ('<td>0</td>')}
+            ${(item.todayDeaths>0 && item.todayDeaths !== null) ? (`<td class="text-danger">+${item.todayDeaths.toLocaleString("hi-IN")}</td>`) : (`<td>0</td>`)}
+            ${(item.recovered>0 && item.recovered !== null) ? (`<td class="text-success">${item.recovered.toLocaleString("hi-IN")}</td>`) : ('<td>0</td>')}
             <td>${item.active.toLocaleString("hi-IN")}</td>
             ${(item.tests > 0) ? (`<td>${item.tests.toLocaleString("hi-IN")}</td>`) : ('<td></td>')}
             ${(item.casesPerOneMillion !== null) ? (`<td>${item.casesPerOneMillion.toLocaleString("hi-IN")}</td>`) : ('<td></td>')}

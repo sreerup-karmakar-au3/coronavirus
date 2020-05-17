@@ -10,4 +10,9 @@ th {
     position: sticky;
     top: -2px;
     padding: 15px !important;
+    border-radius: 5px;
+}
+
+td {
+    border-radius: 5px;
 }
