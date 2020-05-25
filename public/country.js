@@ -67,7 +67,7 @@ $.ajax({
             $('#caption').text(`Day-wise count`);
             $('thead').append('<tr><th scope="col">Date</th><th scope="col">Cases</th><th scope="col">Deaths</th><th scope="col">Recovered</th></tr>');
             Object.keys(countrydetail.timeline.cases).forEach(function(key) {
-                let result = `<tr><td>${new Date(key).toLocaleDateString('en-GB', {day: 'numeric', month: 'short'}).replace(/ /g, '-')}</td> ${(countrydetail.timeline.cases[key]>0) ? (`<td class="text-primary">${countrydetail.timeline.cases[key]}</td>`) : (`<td>${countrydetail.timeline.cases[key]}</td>`)} ${(countrydetail.timeline.deaths[key]>0) ? (`<td class="text-danger">${countrydetail.timeline.deaths[key]}</td>`) : (`<td>${countrydetail.timeline.deaths[key]}</td>`)} ${(countrydetail.timeline.recovered[key]>0) ? (`<td class="text-success">${countrydetail.timeline.recovered[key]}</td>`) : (`<td>${countrydetail.timeline.recovered[key]}</td>`)} </tr>`
+                let result = `<tr><td>${new Date(key).toLocaleDateString('en-GB', {day: 'numeric', month: 'short'}).replace(/ /g, '-')}</td> ${(countrydetail.timeline.cases[key]>0) ? (`<td class="text-primary">${countrydetail.timeline.cases[key].toLocaleString("hi-IN")}</td>`) : (`<td>${countrydetail.timeline.cases[key]}</td>`)} ${(countrydetail.timeline.deaths[key]>0) ? (`<td class="text-danger">${countrydetail.timeline.deaths[key].toLocaleString("hi-IN")}</td>`) : (`<td>${countrydetail.timeline.deaths[key]}</td>`)} ${(countrydetail.timeline.recovered[key]>0) ? (`<td class="text-success">${countrydetail.timeline.recovered[key].toLocaleString("hi-IN")}</td>`) : (`<td>${countrydetail.timeline.recovered[key]}</td>`)} </tr>`
                 $('tbody').append(result);
             });
         }

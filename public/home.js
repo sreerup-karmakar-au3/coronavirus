@@ -1,9 +1,18 @@
+$(document).ready(function() {
+    let days = parseInt($("input[name='record']:checked").val());
+    plotChart(days);
+
+    $("input[type='radio']").on('click', function() {
+        days = parseInt($("input[name='record']:checked").val());
+        plotChart(days);
+    });
+});
+
 $.when(
     $.get("https://disease.sh/v2/all"),
     $.get("https://disease.sh/v2/countries?sort=cases"),
-    $.get("https://disease.sh/v2/historical/all?lastdays=30")
 
-).then(function(all, countrywise, historicaldata) {
+).then(function(all, countrywise) {
 
     $('.tcases').text(`Cases: ${all[0].cases.toLocaleString("hi-IN")}`);
     $('.tdeaths').text(`Deaths: ${all[0].deaths.toLocaleString("hi-IN")}`);
@@ -28,51 +37,53 @@ $.when(
         </tr>`;
         $('tbody').append(result);
     });
-
-    var date = []
-    for(key in historicaldata[0].cases) {
-        date.push(new Date(key).toLocaleDateString('en-GB', {day: 'numeric', month: 'short'}).replace(/ /g, '-'));
-    }
-
-    Chart.defaults.global.legend.display = false;
-    new Chart(document.getElementById('myChart').getContext('2d'), {
-        type: 'line',
-        data: {
-            labels: date,
-            datasets: [
-                {
-                    label: 'Cases',
-                    backgroundColor: 'rgba(255, 255, 255, 0)',
-                    borderColor: 'rgb(40, 62, 255)',
-                    data: Object.values(historicaldata[0].cases)
-                },
-                {
-                    label: 'Deaths',
-                    backgroundColor: 'rgba(255, 255, 255, 0)',
-                    borderColor: 'rgb(214, 28, 21)',
-                    data: Object.values(historicaldata[0].deaths)
-                },
-                {
-                    label: 'Recovered',
-                    backgroundColor: 'rgba(255, 255, 255, 0)',
-                    borderColor: 'rgb(0, 128, 0)',
-                    data: Object.values(historicaldata[0].recovered)
-                }
-            ]
-        },
-        options: {
-            responsive:true,
-            maintainAspectRatio: false,
-        }
-    });
 });
 
-function myFunction(id) {
+function plotChart(days) {
     $.ajax({
-        url: '/country/' + id,
+        url: `https://disease.sh/v2/historical/all?lastdays=${days}`,
         type: 'GET',
-        success: function (message) {
-            console.log("Received" + message);
+        success: function (historicaldata) {
+            var date = []
+            for(key in historicaldata.cases) {
+                date.push(new Date(key).toLocaleDateString('en-GB', {day: 'numeric', month: 'short'}).replace(/ /g, '-'));
+            }
+
+            if(window.RecordChart !== undefined) {
+                window.RecordChart.destroy();
+            }
+
+            Chart.defaults.global.legend.display = false;
+            window.RecordChart = new Chart(document.getElementById('myChart').getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: date,
+                    datasets: [
+                        {
+                            label: 'Cases',
+                            backgroundColor: 'rgba(255, 255, 255, 0)',
+                            borderColor: 'rgb(40, 62, 255)',
+                            data: Object.values(historicaldata.cases)
+                        },
+                        {
+                            label: 'Deaths',
+                            backgroundColor: 'rgba(255, 255, 255, 0)',
+                            borderColor: 'rgb(214, 28, 21)',
+                            data: Object.values(historicaldata.deaths)
+                        },
+                        {
+                            label: 'Recovered',
+                            backgroundColor: 'rgba(255, 255, 255, 0)',
+                            borderColor: 'rgb(0, 128, 0)',
+                            data: Object.values(historicaldata.recovered)
+                        }
+                    ]
+                },
+                options: {
+                    responsive:true,
+                    maintainAspectRatio: false,
+                }
+            });
         }
     });
 }
