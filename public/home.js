@@ -10,7 +10,7 @@ $(document).ready(function() {
 
 $.when(
     $.get("https://disease.sh/v2/all"),
-    $.get("https://disease.sh/v2/countries?sort=cases"),
+    $.get("https://disease.sh/v2/countries?sort=cases")
 
 ).then(function(all, countrywise) {
 
@@ -24,16 +24,15 @@ $.when(
         let result = 
         `<tr class="font-weight-bold" onclick="window.location='/details?countryid=${item.countryInfo._id}'">
             <td><img class="flags" src="${item.countryInfo.flag}"/> ${item.country}</td>
-            <td>${item.cases.toLocaleString("hi-IN")}</td>
-            ${(item.todayCases>0 && item.todayCases !== null) ? (`<td>+${item.todayCases.toLocaleString("hi-IN")}</td>`) : ('<td>0</td>')}
-            ${(item.deaths>0 && item.deaths !== null) ? (`<td>${item.deaths.toLocaleString("hi-IN")}</td>`) : ('<td>0</td>')}
-            ${(item.todayDeaths>0 && item.todayDeaths !== null) ? (`<td class="text-danger">+${item.todayDeaths.toLocaleString("hi-IN")}</td>`) : (`<td>0</td>`)}
-            ${(item.recovered>0 && item.recovered !== null) ? (`<td class="text-success">${item.recovered.toLocaleString("hi-IN")}</td>`) : ('<td>0</td>')}
-            <td>${item.active.toLocaleString("hi-IN")}</td>
-            ${(item.tests > 0) ? (`<td>${item.tests.toLocaleString("hi-IN")}</td>`) : ('<td></td>')}
-            ${(item.casesPerOneMillion !== null) ? (`<td>${item.casesPerOneMillion.toLocaleString("hi-IN")}</td>`) : ('<td></td>')}
-            ${(item.deathsPerOneMillion !== null) ? (`<td>${item.deathsPerOneMillion.toLocaleString("hi-IN")}</td>`) : ('<td></td>')}
-            ${(item.testsPerOneMillion > 0) ? (`<td>${item.testsPerOneMillion.toLocaleString("hi-IN")}</td>`) : ('<td></td>')}
+            <td>${item.cases.toLocaleString("hi-IN")} ${(item.todayCases>0 && item.todayCases !== null) ? (`<span class="text-primary">(+${item.todayCases.toLocaleString("hi-IN")})</span>`) : ('')}</td>
+            <td>${(item.deaths>0 && item.deaths !== null) ? (`${item.deaths.toLocaleString("hi-IN")}`) : ('')} ${(item.todayDeaths>0 && item.todayDeaths !== null) ? (`<span class="text-danger">(+${item.todayDeaths.toLocaleString("hi-IN")})</span>`) : ('')}</td>
+            <td>${(item.recovered>0 && item.recovered !== null) ? (`${item.recovered.toLocaleString("hi-IN")}`) : ('')} ${(item.todayRecovered>0 && item.todayRecovered !== null) ? (`<span class="text-success">(+${item.todayRecovered.toLocaleString("hi-IN")})</span>`) : ('')}</td> 
+            <td>${(item.active !== null) ? (`${item.active.toLocaleString("hi-IN")}`) : ('')}</td>
+            <td>${(item.tests>0 && item.tests !== null) ? (`${item.tests.toLocaleString("hi-IN")}`) : ('')}</td>
+            <td>${(item.casesPerOneMillion !== null) ? (`${item.casesPerOneMillion.toLocaleString("hi-IN")}`) : ('')}</td>
+            <td>${(item.deathsPerOneMillion !== null) ? (`${item.deathsPerOneMillion.toLocaleString("hi-IN")}`) : ('')}</td>
+            <td>${(item.testsPerOneMillion>0 && item.testsPerOneMillion !== null) ? (`${item.testsPerOneMillion.toLocaleString("hi-IN")}`) : ('')}</td>
+            <td>${(item.population !== null) ? (`${item.population.toLocaleString("hi-IN")}`) : ('')}</td>
         </tr>`;
         $('tbody').append(result);
     });

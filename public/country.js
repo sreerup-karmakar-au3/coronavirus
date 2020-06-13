@@ -72,7 +72,7 @@ $.ajax({
             });
         }
     },
-    error: function(err) {
+    error: function() {
         $('.jumbotron > h1').text("No record found");
     }
 });
